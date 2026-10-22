@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#100f24" />
+  <title>ARCANA — O Despertar da Magia</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand-mark">✦</div>
+      <div class="brand"><span>ARCANA</span><small>O DESPERTAR DA MAGIA</small></div>
+      <div class="top-spacer"></div>
+      <div class="world-tag"><span class="pulse"></span> VALE DAS CINZAS</div>
+      <button class="icon-btn" id="soundBtn" title="Ativar/desativar sons" aria-label="Ativar/desativar sons">♫</button>
+      <button class="icon-btn" id="saveBtn" title="Salvar progresso" aria-label="Salvar progresso">▣</button>
+      <button class="icon-btn" id="helpBtn" title="Controles" aria-label="Controles">?</button>
+    </header>
+
+    <section class="game-layout">
+      <aside class="panel left-panel">
+        <div class="section-label">ARQUI-MAGO</div>
+        <div class="hero-card">
+          <div class="hero-orb"><span>✧</span><i></i></div>
+          <div class="hero-name" id="heroName">Aprendiz</div>
+          <div class="hero-sub">Portador da Centelha</div>
+          <div class="level-row"><span>NÍVEL <b id="levelText">1</b></span><span id="xpText">0 / 100 XP</span></div>
+          <div class="xp-track"><div id="xpBar"></div></div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-line"><span>♥ Vitalidade</span><b id="hpText">100 / 100</b></div>
+          <div class="meter hp"><div id="hpBar"></div></div>
+          <div class="stat-line"><span>✧ Mana</span><b id="manaText">100 / 100</b></div>
+          <div class="meter mana"><div id="manaBar"></div></div>
+        </div>
+        <div class="divider"></div>
+        <div class="section-label">MISSÃO ATUAL <span class="quest-icon">✦</span></div>
+        <div class="quest-card">
+          <div class="quest-title" id="questTitle">Ecos na floresta</div>
+          <p id="questDescription">Derrote 5 criaturas sombrias que rondam as ruínas.</p>
+          <div class="quest-progress"><span id="questProgress">0 / 5</span><div class="quest-track"><div id="questBar"></div></div></div>
+          <div class="reward">✧ <span id="questReward">Recompensa: 80 XP · 35 ouro</span></div>
+        </div>
+        <div class="divider"></div>
+        <div class="section-label">RECURSOS</div>
+        <div class="resource-row"><span>◈ Ouro</span><b id="goldText">0</b></div>
+        <div class="resource-row"><span>❖ Cristais arcanos</span><b id="crystalText">0</b></div>
+        <div class="resource-row"><span>☄ Criaturas derrotadas</span><b id="killText">0</b></div>
+        <button class="wide-btn subtle-btn" id="restBtn">✧ Meditar e recuperar</button>
+      </aside>
+
+      <section class="arena-wrap">
+        <div class="arena-heading"><div><div class="section-label">TERRAS ESQUECIDAS</div><h1>O Bosque Velado</h1></div><div class="coordinates"><span class="live-dot"></span> <span id="statusText">A magia está desperta</span></div></div>
+        <div class="canvas-frame">
+          <canvas id="game" width="960" height="600" aria-label="Mundo de jogo ARCANA"></canvas>
+          <div class="canvas-vignette"></div>
+          <div class="zone-chip"><span>⌖</span> BOSQUE VELADO <small>REGIÃO I</small></div>
+          <div class="boss-alert hidden" id="bossAlert">☠ PRESENÇA ANCESTRAL DETECTADA</div>
+          <div class="toast" id="toast"></div>
+          <div class="level-flash hidden" id="levelFlash"><span>✧</span><b>NOVO NÍVEL!</b><small>Seu poder cresceu.</small></div>
+          <div class="map-hint">WASD mover · Mouse mirar · Clique lançar</div>
+        </div>
+        <div class="arena-footer">
+          <div class="objective"><span class="objective-glyph">✦</span><div><b id="objectiveTitle">Siga os rastros de magia</b><small id="objectiveSub">Encontre criaturas perto das ruínas antigas.</small></div></div>
+          <div class="footer-actions"><button class="small-btn" id="journalBtn">☷ Diário</button><button class="small-btn" id="mapBtn">⌖ Mapa</button></div>
+        </div>
+        <div class="spellbar-wrap">
+          <div class="spellbar-label"><span>GRIMÓRIO DE BATALHA</span><small>Pressione 1–4 ou clique em um feitiço</small></div>
+          <div class="spellbar" id="spellbar">
+            <button class="spell active fire" data-spell="fire" title="Bola de fogo (1)"><span class="spell-key">1</span><span class="spell-symbol">☄</span><b>Bola de fogo</b><small>18 mana</small></button>
+            <button class="spell frost" data-spell="frost" title="Nova gélida (2)"><span class="spell-key">2</span><span class="spell-symbol">❄</span><b>Nova gélida</b><small>24 mana</small></button>
+            <button class="spell lightning" data-spell="lightning" title="Cadeia elétrica (3)"><span class="spell-key">3</span><span class="spell-symbol">ϟ</span><b>Cadeia elétrica</b><small>28 mana</small></button>
+            <button class="spell arcane" data-spell="arcane" title="Lança arcana (4)"><span class="spell-key">4</span><span class="spell-symbol">✧</span><b>Lança arcana</b><small>10 mana</small></button>
+          </div>
+          <div class="combo-note"><span>✦</span><b>REAÇÃO ELEMENTAL</b><span id="comboText">Lance feitiços diferentes em sequência para descobrir combinações.</span></div>
+        </div>
+      </section>
+
+      <aside class="panel right-panel">
+        <div class="section-label">GRIMÓRIO <span class="book-mark">⌁</span></div>
+        <div class="book-intro"><div class="book-icon">✧</div><div><b>As Artes Arcanas</b><small>Seu conhecimento mágico</small></div></div>
+        <div class="spell-detail" id="spellDetail"><div class="detail-glyph fire-glyph">☄</div><div class="detail-title">Bola de fogo <span class="known">DOMINADA</span></div><p>Dispare um orbe flamejante que explode ao atingir o alvo, causando dano em área.</p><div class="detail-stats"><span>CUSTO <b>18 mana</b></span><span>DANO <b>30</b></span></div></div>
+        <div class="spell-detail compact"><div class="mini-glyph frost-glyph">❄</div><div class="compact-info"><b>Nova gélida</b><small>Congela inimigos próximos por um instante.</small><span class="unlock-label">DOMINADA · 24 MANA</span></div></div>
+        <div class="spell-detail compact"><div class="mini-glyph lightning-glyph">ϟ</div><div class="compact-info"><b>Cadeia elétrica</b><small>Salta entre inimigos próximos, causando dano em cadeia.</small><span class="unlock-label">DOMINADA · 28 MANA</span></div></div>
+        <div class="spell-detail compact"><div class="mini-glyph arcane-glyph">✧</div><div class="compact-info"><b>Lança arcana</b><small>Projétil rápido e barato para ataques precisos.</small><span class="unlock-label">DOMINADA · 10 MANA</span></div></div>
+        <div class="divider"></div>
+        <div class="section-label">SINTONIA ELEMENTAL</div>
+        <div class="element-grid"><div class="element fire-el"><span>☄</span><small>FOGO</small></div><div class="element frost-el"><span>❄</span><small>GELO</small></div><div class="element storm-el"><span>ϟ</span><small>TROVÃO</small></div><div class="element arcane-el"><span>✧</span><small>ARCANO</small></div></div>
+        <div class="combo-card"><div class="combo-heading">✦ Descoberta de combinação</div><p id="comboDescription">Fogo + Gelo: <b>Choque térmico</b>. Acerte o mesmo inimigo com os dois elementos para causar dano extra.</p></div>
+        <div class="divider"></div>
+        <div class="section-label">ATALHOS</div>
+        <div class="shortcut-list"><div><kbd>W A S D</kbd><span>Mover</span></div><div><kbd>Mouse</kbd><span>Mirar</span></div><div><kbd>Botão esquerdo</kbd><span>Lançar magia</span></div><div><kbd>Espaço</kbd><span>Investida arcana</span></div><div><kbd>Q</kbd><span>Poção de mana</span></div><div><kbd>J</kbd><span>Diário de missões</span></div></div>
+      </aside>
+    </section>
+    <footer class="bottomline"><span>ARCANA <i>v0.1 — PROTÓTIPO JOGÁVEL</i></span><span>Seu destino ainda está sendo escrito <b>✦</b></span></footer>
+  </main>
+
+  <div class="modal hidden" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-card"><button class="modal-close" id="modalClose" aria-label="Fechar">×</button><div class="modal-emblem">✧</div><div class="section-label" id="modalEyebrow">ARCANA</div><h2 id="modalTitle">Controles e segredos</h2><div id="modalContent" class="modal-content"></div><button class="wide-btn primary-btn" id="modalOk">Entendi, vamos jogar</button></div></div>
+  <script src="game.js"></script>
+</body>
+</html>
